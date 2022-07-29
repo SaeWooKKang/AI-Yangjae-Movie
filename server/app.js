@@ -36,7 +36,7 @@ app.use('/posts', authMiddleware, postsRouter);
 app.use('/user', userRouter);
 
 app.listen(
-  3000,
+  3001,
   () => console.log('server started!')
 );
 

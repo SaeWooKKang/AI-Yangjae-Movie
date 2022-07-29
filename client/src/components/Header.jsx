@@ -1,4 +1,16 @@
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+
 const Header = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['userData']);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!cookies.userData) {
+      navigate('/');
+    }
+  }, [cookies, navigate]);
 
   return (
     <header>
@@ -17,10 +29,20 @@ const Header = () => {
                 <li><a href="#" className="text-white">Email me</a></li>
               </ul>
               <h4 className="text-white">Info</h4>
-              <ul className="list-unstyled">
-                <li><button className="btn btn-danger" style={{ marginBottom: '5%' }}>LogOut</button></li>
-                <li><button className="btn btn-primary">Info</button></li>
-              </ul>
+              {
+                cookies.userData 
+                  ? <ul className="list-unstyled">
+                      <li><button onClick={() => {
+                        removeCookie('userData', { path: '/' });
+                        navigate('/');
+                      }} className="btn btn-danger" style={{ marginBottom: '5%' }}>LogOut</button></li>
+                      <li><button className="btn btn-primary">Info</button></li>
+                    </ul>
+                  : <ul className="list-unstyled">
+                      <li><button onClick={ () => navigate('/') } className="btn btn-primary">Login</button></li>
+                    </ul>
+              }
+              
             </div>
           </div>
         </div>

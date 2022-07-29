@@ -63,6 +63,7 @@ const Login = () => {
       }
       {
         view.signUp && <SignUpForm 
+          setSignUpdata={ setSignUpdata }
           signUpdata={ signUpdata }
           handleChangeSignUpData={ handleChangeSignUpData } />
       }

@@ -1,6 +1,8 @@
 import reviewData from '../data/review.json';
+import { useNavigate } from 'react-router-dom'
 
 const Review = () => {
+  const navigate = useNavigate();
 
   return (
     <main>
@@ -13,10 +15,9 @@ const Review = () => {
               또한 삭제, 수정이 가능합니다.
             </p>
             <p>
-              <button className="btn btn-primary my-2 m-1" >
+              <button onClick={() => navigate('/review/create') } className="btn btn-primary my-2 m-1" >
                 Create Review
               </button>
-              
             </p>
           </div>
         </div>
@@ -30,12 +31,12 @@ const Review = () => {
                 <div className="col" key={ index }>
                   <div className="card shadow-sm">
                     <div className='card-img-top' style={{ textAlign:'center' }}>
-                      <img src={it.img} className="bd-placeholder-img " width="50%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
+                      <img src={it.img} className="bd-placeholder-img " width="50%" height="225" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
                     </div>
     
                     <div className="card-body">
                       <p className="card-text">{ it.content.substring(0,((it.content).length / 2)) }
-                        <a style={{color: 'blue'}}> ...더보기</a>
+                        <a href='/' style={{color: 'blue'}}> ...더보기</a>
                       </p>
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
