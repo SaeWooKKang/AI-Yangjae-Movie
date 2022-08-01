@@ -15,11 +15,13 @@ router.get('/', async (req, res, next) => {
 
 // post 요청
 router.post('/', async (req, res, next) => {
-  const { title, content, email } = req.body;
+  const { img, title, content, email } = req.body;
+  console.log(img, title, content, email)
   try {
     const authData = await User.findOne({ email });
     // 저장된 document 객체 줌
     await Post.create({
+      img,
       title,
       content,
       author: authData,

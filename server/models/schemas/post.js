@@ -3,6 +3,7 @@ const shortId = require('./type/short-id');
 
 module.exports = new Schema({
   shortId,
+  img: String,
   title: String,
   content: String,
   author: {
