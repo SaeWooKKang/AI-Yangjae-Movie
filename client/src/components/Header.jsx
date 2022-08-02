@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import kakaoLoginButtonImg from '../img/kakao_login_medium_narrow.png';
 
 const Header = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['userData']);
@@ -33,9 +34,10 @@ const Header = () => {
                 cookies.userData 
                   ? <ul className="list-unstyled">
                       <li><button onClick={() => {
-                        removeCookie('userData', { path: '/' });
-                        navigate('/');
-                      }} className="btn btn-danger" style={{ marginBottom: '5%' }}>LogOut</button></li>
+                          removeCookie('userData', { path: '/' });
+                          navigate('/');
+                        }} className="btn btn-danger" style={{ marginBottom: '5%' }}>LogOut</button>
+                      </li>
                       <li><button className="btn btn-primary">Info</button></li>
                     </ul>
                   : <ul className="list-unstyled">

@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import url from '../../data/port.json';
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Detail = () => {
   const params = useParams();

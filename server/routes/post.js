@@ -5,12 +5,38 @@ const asyncHandler = require('./../utils/async-handler');
 const router = Router();
 
 // get 요청
+// 게시글 현재 페이지와, 보여줄 게시글 갯수 필요 
 router.get('/', async (req, res, next) => {
-  const posts = await Post
-    .find({})
-    .populate('author');
+
+  // let page = 1;
+  // let perPage = 6;
+  if (req.query.page < 1) {
+    // page가 1보다 작다면 오류처리
+    next('Please enter a number greater than 1'); 
+    return ;
+  }
+
+  // req.query.page가 null or undefined면 1을 넣어라. 
+  // 즉 default 가 1
+  const page = Number(req.query.page || 1); 
+
+  const perPage = Number(req.query.perPage || 6);
+
+  const total = await Post.countDocuments({});
+
+  const posts = await Post.find({})
+    .sort({createdAt: -1})// 마지막으로 작성된 게시글을 첫번째 인덱스로 가져옴
+    .skip(perPage * (page -1)) // ex) 2페이지라면 5번부터 
+    .limit(perPage) // 6개씩 가져옴
+    .populate('author'); 
+
+  const totalPage = Math.ceil(total / perPage);
+
+  // const posts = await Post
+  //   .find({})
+  //   .populate('author');
   
-  res.json(posts);
+  res.json({ posts, totalPage });
 });
 
 // post 요청
