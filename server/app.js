@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const postsRouter = require('./routes/post');
 const userRouter = require('./routes/user');
+const authROuter = require('./routes/auth');
 
 const authMiddleware = require('./utils/authMiddleware');
 
@@ -34,6 +35,9 @@ app.use('/posts', authMiddleware, postsRouter);
 
 // user 라우팅
 app.use('/user', userRouter);
+
+// auth 라우팅
+app.use('/auth', authROuter);
 
 app.listen(
   3001,

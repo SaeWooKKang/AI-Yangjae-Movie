@@ -76,32 +76,32 @@ router.post('/login', asyncHandler(async (req, res, next) => {
   // JWT를 이용하여 email과 name을 서명해줌
   // 토큰을 서버 메모리에 저장 
   jwt.sign({
-    email,
-    name: checkEmail.name,
-  }, jwtConfig.secret, {
-    expiresIn: '1d' // 1y, 1d, 2hrs, 2h, 1m, 5s
-  }, (err, token) => {
+      email,
+      name: checkEmail.name,
+    }, jwtConfig.secret, {
+      expiresIn: '1d' // 1y, 1d, 2hrs, 2h, 1m, 5s
+    }, (err, token) => {
 
-    // 서명 부분에서 오류가 났을 경우
-    // TODO 어떨때 서명 오류가 나는거지 ?
-    if (err) {
-      res.status(401).json({
-        status: false,
-        message: '로그인을 해주세요'
-      });
-      return;
-    } 
+      // 서명 부분에서 오류가 났을 경우
+      // TODO 어떨때 서명 오류가 나는거지 ?
+      if (err) {
+        res.status(401).json({
+          status: false,
+          message: '로그인을 해주세요'
+        });
+        return;
+      } 
 
-    // 오류가 나지 않았을 경우
-    else {
-      
-      res.json({ 
-        status: true,
-        accessToken: token,
-        email,
-        name: checkEmail.name 
-      });
-    }
+      // 오류가 나지 않았을 경우
+      else {
+        
+        res.json({ 
+          status: true,
+          accessToken: token,
+          email,
+          name: checkEmail.name 
+        });
+      }
   });
 
 }));
