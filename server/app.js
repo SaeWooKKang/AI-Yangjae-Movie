@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 
 const postsRouter = require('./routes/post');
 const userRouter = require('./routes/user');
-const authROuter = require('./routes/auth');
+const authRouter = require('./routes/auth');
+const mlRouter = require('./routes/ml');
+
 
 const authMiddleware = require('./utils/authMiddleware');
 
@@ -37,7 +39,10 @@ app.use('/posts', authMiddleware, postsRouter);
 app.use('/user', userRouter);
 
 // auth 라우팅
-app.use('/auth', authROuter);
+app.use('/auth', authRouter);
+
+// ml
+app.use('/ml', mlRouter);
 
 app.listen(
   3001,

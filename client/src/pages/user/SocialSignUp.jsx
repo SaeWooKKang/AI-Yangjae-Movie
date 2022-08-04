@@ -30,6 +30,9 @@ const SocialSignUp = () => {
     });
   }
 
+  /**
+   * 쿠키에서 유저 정보 받아와서 폼 채움
+   */
   useEffect(() => {
     console.log(cookiesAuth);
 
@@ -81,6 +84,7 @@ const SocialSignUp = () => {
       setErrorMessage(err.response.data.error)
     });
   };
+
   const sendSignUpData = () => {
     return axios.post(`${ port.url }/user/signUp`, signUpdata); 
   }
